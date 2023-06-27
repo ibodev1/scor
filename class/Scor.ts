@@ -1,6 +1,6 @@
 import Player from "./Player.ts";
 
-interface Result {
+export interface Result {
   winner: Player | null;
   changeCount: number;
   syncCount: number;
@@ -64,9 +64,15 @@ class Scor {
       p.scor === arr[0].scor
     );
     if (isScoreless) return null;
-    return this.players.reduce((player, currentPlayer) => {
+    const winner = this.players.reduce((player, currentPlayer) => {
       return currentPlayer.scor > player.scor ? currentPlayer : player;
     });
+    if (
+      this.players.filter((p) => p !== winner).findIndex((p) =>
+        p.scor === winner.scor
+      ) >= 0
+    ) return null;
+    return winner;
   }
 
   private equalization(player: Player, count = this.count) {
