@@ -1,3 +1,5 @@
+[Türkçesi için tıkla.](/README.tr.md)
+
 # Scor Algorithm Project
 
 One day while watching a tennis match at home, I was intrigued by the scoreboard. Then I wanted to write my own scoring algorithm. This project contains a use case of the algorithm I developed using `Typescript`.
