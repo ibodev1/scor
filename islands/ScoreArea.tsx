@@ -64,12 +64,18 @@ export default function ScoreArea({ players, scoreType }: ScoreAreaProps) {
         </Button>
         <Button
           onClick={() => {
-            alert(
-              "Winner! " +
-                score.value.result().winner?.name +
-                " Score : " +
-                score.value.result().winner?.score
-            );
+            if (score.value.result().winner) {
+              alert(
+                "Winner! " +
+                  score.value.result().winner?.name +
+                  "\nScore : " +
+                  score.value.result().winner?.score +
+                  "\nChane Count : " +
+                  score.value.result().changeCount +
+                  "\nSync Count : " +
+                  score.value.result().syncCount
+              );
+            }
             console.log(score.value.result());
           }}
         >
