@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Scor App</title>
+        <title>Score App</title>
       </Head>
       <main class="container mx-auto">
         <a href="/equalization" class="underline text-indigo-500 hover:text-indigo-600 p-2">equalization</a>

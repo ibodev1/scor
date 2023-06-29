@@ -21,32 +21,32 @@ Oyuncu'yu temsil eder. Parametre olarak string alır ve oyuncunun ismini belirle
 const player = new Player("player 1");
 ```
 
-[Scor.ts](/class/Scor.ts)
+[Score.ts](/class/Score.ts)
 Skor sistemini temsil eder. Parametre olarak Skorlama çeşidini, oyuncuları ve kaçar kaçar artacağını belirten değer girilir.
 
 ```ts
-const scor = new Scor(ScorType.EQUALIZATION, [player])
+const score = new Score(ScoreType.EQUALIZATION, [player])
 ```
 
 ##### .add(player) function
 Oyunculara yeni bir tane ekler.
 
 ```ts
-scor.add(player)
+score.add(player)
 ```
 
 ##### .up(player) function
 Verilen oyuncunun skorunu günceller.
 
 ```ts
-scor.up(player)
+score.up(player)
 ```
 
 ##### .result() function
 Sonuçları döndürür.
 
 ```ts
-scor.result()
+score.result()
 
 interface Result {
   winner: Player | null;

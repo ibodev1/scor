@@ -2,32 +2,32 @@
 import { useSignal, type Signal, effect } from "@preact/signals";
 import { Button } from "../components/Button.tsx";
 import Player from "../class/Player.ts";
-import Scor, { ScorType } from "../class/Scor.ts";
+import Score, { ScoreType } from "../class/Score.ts";
 
-interface ScorAreaProps {
+interface ScoreAreaProps {
   players: Signal<Player[]>;
-  scorType: ScorType;
+  scoreType: ScoreType;
 }
 
-export default function ScorArea({ players, scorType }: ScorAreaProps) {
+export default function ScoreArea({ players, scoreType }: ScoreAreaProps) {
   const playerName = useSignal("");
-  const scor = useSignal<Scor>(new Scor(scorType, players.value));
+  const score = useSignal<Score>(new Score(scoreType, players.value));
 
   const addNewPlayer = (playerName: string) => {
     const newPlayer = new Player(playerName);
     players.value = [...players.value, newPlayer];
-    scor.value.add(newPlayer);
+    score.value.add(newPlayer);
   };
 
   const up = (player: Player) => {
-    scor.value.up(player);
-    players.value = [...scor.value.result().players];
+    score.value.up(player);
+    players.value = [...score.value.result().players];
   };
 
   return (
     <div class="m-2">
       <ul class="space-y-2 w-96">
-        {scor.value.result().players.map((p) => {
+        {score.value.result().players.map((p) => {
           return (
             <li
               key={p.id}
@@ -36,7 +36,7 @@ export default function ScorArea({ players, scorType }: ScorAreaProps) {
               <div class="text-2xl font-bold px-4">{p.name}</div>
               <div class="flex items-center justify-end">
                 <div class="w-auto min-w-[3rem] h-12 flex items-center justify-center font-bold text-4xl bg-purple-500">
-                  {p.scor}
+                  {p.score}
                 </div>
                 <button
                   class="w-12 h-12 text-2xl font-semibold bg-red-500"
@@ -66,11 +66,11 @@ export default function ScorArea({ players, scorType }: ScorAreaProps) {
           onClick={() => {
             alert(
               "Winner! " +
-                scor.value.result().winner?.name +
-                " Scor : " +
-                scor.value.result().winner?.scor
+                score.value.result().winner?.name +
+                " Score : " +
+                score.value.result().winner?.score
             );
-            console.log(scor.value.result());
+            console.log(score.value.result());
           }}
         >
           Skor

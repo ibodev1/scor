@@ -1,8 +1,8 @@
 import { Head } from "$fresh/runtime.ts";
 import { useSignal } from "@preact/signals";
-import ScorArea from "../islands/ScorArea.tsx";
+import ScoreArea from "../islands/ScoreArea.tsx";
 import Player from "../class/Player.ts";
-import { ScorType } from "../class/Scor.ts";
+import { ScoreType } from "../class/Score.ts";
 
 interface TypeProps {
   params: {
@@ -15,11 +15,20 @@ export default function Type(props: TypeProps) {
   return (
     <>
       <Head>
-        <title>Scor App</title>
+        <title>Score App</title>
       </Head>
       <main class="container mx-auto">
-        <h1 class="text-4xl font-bold my-4 mx-2 uppercase">{props.params.type}</h1>
-        <ScorArea players={players} scorType={props.params.type === "reduction" ? ScorType.REDUCTION : ScorType.EQUALIZATION} />
+        <h1 class="text-4xl font-bold my-4 mx-2 uppercase">
+          {props.params.type}
+        </h1>
+        <ScoreArea
+          players={players}
+          scoreType={
+            props.params.type === "reduction"
+              ? ScoreType.REDUCTION
+              : ScoreType.EQUALIZATION
+          }
+        />
       </main>
     </>
   );

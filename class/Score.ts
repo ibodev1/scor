@@ -7,25 +7,25 @@ export interface Result {
   players: Player[];
 }
 
-export enum ScorType {
+export enum ScoreType {
   EQUALIZATION = 0,
   REDUCTION = 1,
 }
 
-class Scor {
+class Score {
   players: Player[];
   changeCount: number;
   syncCount: number;
-  scorType: ScorType;
+  scoreType: ScoreType;
   count: number;
 
   constructor(
-    scorType: ScorType = ScorType.EQUALIZATION,
+    scoreType: ScoreType = ScoreType.EQUALIZATION,
     players: Player[] = [],
     count = 1,
   ) {
     this.players = players;
-    this.scorType = scorType;
+    this.scoreType = scoreType;
     this.changeCount = 0;
     this.syncCount = 0;
     this.count = count;
@@ -38,11 +38,11 @@ class Scor {
   public up(player: Player, count = this.count) {
     const findedPlayer = this.players.find((p) => p === player);
     if (findedPlayer) {
-      switch (this.scorType) {
-        case ScorType.EQUALIZATION:
+      switch (this.scoreType) {
+        case ScoreType.EQUALIZATION:
           this.equalization(findedPlayer, count);
           break;
-        case ScorType.REDUCTION:
+        case ScoreType.REDUCTION:
           this.reduction(findedPlayer, count);
           break;
       }
@@ -55,21 +55,21 @@ class Scor {
       winner: this.getTopPlayer(),
       changeCount: this.changeCount,
       syncCount: this.syncCount,
-      players: this.players.sort((a, b) => b.scor - a.scor),
+      players: this.players.sort((a, b) => b.score - a.score),
     };
   }
 
   private getTopPlayer(): Player | null {
     const isScoreless = this.players.every((p, _i, arr) =>
-      p.scor === arr[0].scor
+      p.score === arr[0].score
     );
     if (isScoreless) return null;
     const winner = this.players.reduce((player, currentPlayer) => {
-      return currentPlayer.scor > player.scor ? currentPlayer : player;
+      return currentPlayer.score > player.score ? currentPlayer : player;
     });
     if (
       this.players.filter((p) => p !== winner).findIndex((p) =>
-        p.scor === winner.scor
+        p.score === winner.score
       ) >= 0
     ) return null;
     return winner;
@@ -77,11 +77,11 @@ class Scor {
 
   private equalization(player: Player, count = this.count) {
     const winner = this.getTopPlayer();
-    if (winner && player !== winner && player.scor + count === winner.scor) {
-      winner.scor -= count;
+    if (winner && player !== winner && player.score + count === winner.score) {
+      winner.score -= count;
       this.syncCount += 1;
     } else {
-      player.scor += count;
+      player.score += count;
     }
     return player;
   }
@@ -89,11 +89,11 @@ class Scor {
   private reduction(player: Player, count = this.count) {
     const winner = this.getTopPlayer();
     for (const p of this.players) {
-      if (p !== player && p.scor !== 0) {
-        p.scor -= count;
+      if (p !== player && p.score !== 0) {
+        p.score -= count;
       } else if (player === p) {
-        player.scor += count;
-        if (winner && player !== winner && player.scor === winner.scor) {
+        player.score += count;
+        if (winner && player !== winner && player.score === winner.score) {
           this.syncCount += 1;
         }
       }
@@ -103,4 +103,4 @@ class Scor {
   }
 }
 
-export default Scor;
+export default Score;

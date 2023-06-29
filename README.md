@@ -1,6 +1,6 @@
 [Türkçesi için tıkla.](/README.tr.md)
 
-# Scor Algorithm Project
+# Score Algorithm Project
 
 One day while watching a tennis match at home, I was intrigued by the scoreboard. Then I wanted to write my own scoring algorithm. This project contains a use case of the algorithm I developed using `Typescript`.
 
@@ -23,32 +23,32 @@ Represents the player. Takes a string as a parameter and sets the player's name.
 const player = new Player("player 1");
 ```
 
-[Scor.ts](/class/Scor.ts)
+[Score.ts](/class/Score.ts)
 Represents the scoring system. As a parameter you can enter the type of scoring, the players and the number of increments.
 
 ```ts
-const scor = new Scor(ScorType.EQUALIZATION, [player])
+const score = new Score(ScoreType.EQUALIZATION, [player])
 ```
 
 ##### .add(player) function
 Adds a new one to the players.
 
 ```ts
-scor.add(player)
+score.add(player)
 ```
 
 ##### .up(player) function
 Updates the given player's score.
 
 ```ts
-scor.up(player)
+score.up(player)
 ```
 
 ##### .result() function
 Returns the results.
 
 ```ts
-scor.result()
+score.result()
 
 interface Result {
   winner: Player | null;

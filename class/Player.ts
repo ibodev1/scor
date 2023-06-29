@@ -1,12 +1,12 @@
 class Player {
   id: string;
   name: string;
-  scor: number;
+  score: number;
 
-  constructor(name: string, initialScor = 0) {
+  constructor(name: string, initialScore = 0) {
     this.id = this.genId();
     this.name = name;
-    this.scor = initialScor;
+    this.score = initialScore;
   }
 
   private genId() {
